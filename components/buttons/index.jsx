@@ -1,4 +1,4 @@
-export const Button = ({
+const Button = ({
     type='button',
     text,
     color='primary',
@@ -13,5 +13,7 @@ export const Button = ({
             disabled={disabled}
             onClick={handleClick}>
             {text}</button>
-    )
-}
+    );
+};
+
+export default Button;

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const ImageUpload = ({
+const ImageUpload = ({
     className= '',
     setImage,
     imagePreview,
@@ -60,4 +60,6 @@ export const ImageUpload = ({
             /> 
         </div>
     );
-}
+};
+
+export default ImageUpload;
