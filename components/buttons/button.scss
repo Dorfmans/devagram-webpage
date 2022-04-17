@@ -1,0 +1,39 @@
+@mixin primary {
+    background-color: $primaryColor;
+    color: $contentColor;
+    border: 2px solid $primaryColor;
+}
+
+@mixin outlined {
+    background-color: $backgroundColor;
+    color: $primaryColor;
+    border: 2px solid $primaryColor;
+    
+}
+
+.btn {
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &.primary {
+        @include primary;
+        
+        &:hover {
+            @include outlined;
+        }
+    }
+    
+    &.outlined {
+        @include outlined;
+        
+        &:hover {
+            @include primary;
+        }
+    }
+
+    &:disabled {
+        opacity: 0.2;
+    }
+}

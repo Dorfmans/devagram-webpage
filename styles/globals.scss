@@ -1,0 +1,19 @@
+@import '../public/fonts/fonts.scss';
+@import './variables.scss';
+@import '../components/buttons/button.scss';
+
+* {
+  background-color: $backgroundColor;
+  color: $contentColor;
+  font-family: $fontRegular;
+  font-size:  14px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hidden {
+  display: none;
+}
