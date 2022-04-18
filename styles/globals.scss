@@ -1,12 +1,19 @@
-@import '../public/fonts/fonts.scss';
 @import './variables.scss';
+@import './publicPage.scss';
 @import '../components/buttons/button.scss';
+@import '../components/publicInput/publicInput.scss';
+@import '../public/fonts/fonts.scss';
 
 * {
   background-color: $backgroundColor;
   color: $contentColor;
   font-family: $fontRegular;
   font-size:  14px;
+}
+
+html, body, #__next {
+  height: 100%;
+  margin: 0;
 }
 
 .avatar {
@@ -16,4 +23,17 @@
 
 .hidden {
   display: none;
+}
+
+input{
+  &::placeholder {
+    color: $grayColor;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    color: $grayColor;
+  }
+  &::-ms-input-placeholder {
+    color: $grayColor;
+  }
 }

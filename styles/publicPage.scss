@@ -1,0 +1,82 @@
+.publicPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 32px;
+
+    .logoContainer {
+        position: relative;
+        height: 17%;
+        width: 100%;
+        margin-bottom: 50px;
+    }
+
+    .publicPageContent {
+        width: 100%;
+    }
+
+    .btn {
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    .publicPageFooter {
+        text-align: center;
+        margin-top: 24px;
+
+        p {
+            color: $grayColor;
+            margin: 0px 0px 2px;
+        }
+
+        a{
+            color: $primaryColor;
+            font-family: $fontBold;
+        }
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+        flex-direction: row;
+        padding: 0 140px;
+        font-size: 18px;
+
+        .logoContainer {
+            height: 35%;
+            flex: 2;
+
+            .logo {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        .publicPageContent {
+            flex: 1;
+            border: 1px solid $primaryColor;
+            width: 30%;
+            border-radius: 30px;
+            padding: 70px;
+        }  
+
+        .btn {
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .publicPageFooter {
+
+            p, a {
+                font-size: 16px;
+            }
+        }
+
+        .publicInput {
+            input {
+                font-size: 16px;
+            };
+        }
+
+    }
+}
