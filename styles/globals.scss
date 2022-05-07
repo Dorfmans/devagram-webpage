@@ -54,3 +54,11 @@ input{
     display: none;
   }
 }
+
+.validateMessage {
+  display: block;
+  color: $grayColor;
+  font-size: 70%;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}

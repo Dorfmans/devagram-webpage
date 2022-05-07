@@ -9,8 +9,6 @@ const PublicInput = ({
     validateMessage ="",
     inValueChange
 
-
-
 }) => {
     return(
         <div className="publicInputContainer">
@@ -31,12 +29,10 @@ const PublicInput = ({
                     value={value}
                     onChange={inValueChange}
                 />
-                
 
             </div>
-                
-                {showValidateMessage &&
-                <p className="validateMessage">{validateMessage}</p>}
+
+                {showValidateMessage && <p className="validateMessage">{validateMessage}</p>}
 
         </div>
     );
