@@ -1,20 +1,25 @@
-import PublicInput from "../publicInput";
-import Button from "../buttons";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import Button from "../buttons";
+import PublicInput from "../publicInput";
+
 import { validatePassword, validateEmail} from "../../utils/validations"
+
+import UserService from "../../services/UserService";
 
 import mail from "../../public/images/mail.svg";
 import key from "../../public/images/key.svg";
 import hireMi from "../../public/images/hireMi.svg";
 
-
+const userService = new UserService
 
 const Login = () => {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isSubmiting, setIsSubmiting] = useState(false);
 
     const loginIsValid = () => {
         return (
@@ -23,6 +28,30 @@ const Login = () => {
         )
     }
     
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        if(!loginIsValid()) {
+            return;
+        }
+
+        setIsSubmiting(true);
+
+        try{
+
+            await userService.login({
+                login: email,
+                password
+            })
+
+            alert("Logged In!")
+        }catch(error){
+            alert("Login Error. " + error?.response?.data?.error)
+        }
+
+        setIsSubmiting(false);
+
+    }
+
     return (
         <section className={`loginPage publicPage`}>
 
@@ -39,7 +68,7 @@ const Login = () => {
 
             <div className="publicPageContent">
 
-                <form>
+                <form onSubmit={onSubmit}> 
 
                     <PublicInput
                         image={mail}
@@ -64,7 +93,7 @@ const Login = () => {
                     <Button 
                         text="Login"
                         type="submit"
-                        disabled={!loginIsValid()}
+                        disabled={!loginIsValid() || isSubmiting}
                     />
 
                 </form>

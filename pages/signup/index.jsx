@@ -1,11 +1,14 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+
 import ImageUpload from "../../components/imageUpload"
 import PublicInput from "../../components/publicInput"
 import Button from "../../components/buttons"
-import { validatePassword, validateEmail, validateName, validateConfirmPassword} from "../../utils/validations"
 
+import { validatePassword, validateEmail, validateName, validateConfirmPassword } from "../../utils/validations"
+
+import UserService from "../../services/UserService"
 
 import hireMi from "../../public/images/hireMi.svg"
 import profileON from "../../public/images/profileON.svg"
@@ -14,6 +17,8 @@ import key from "../../public/images/key.svg"
 import avatar from "../../public/images/avatar.svg"
 
 
+const userService = new UserService();
+
 const SignUp = () => {
     
     const [image, setImage] = useState("");
@@ -21,14 +26,46 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [isSubmiting, setIsSubmiting ] = useState(false);
 
     const signUpIsValid = () => {
-        validateName(name)
-        && validateEmail(email)
-        && validatePassword(password)
-        && validateConfirmPassword(password, confirmPassword)
+        return (
+            validateName(name)
+            && validateEmail(email)
+            && validatePassword(password)
+            && validateConfirmPassword(password, confirmPassword)
+        );
     }
-    
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        if(!signUpIsValid()){
+            return;
+        }
+
+        setIsSubmiting(true);
+
+        try{
+
+            const signUpReqBody = new FormData();
+
+            signUpReqBody.append("user", name)
+            signUpReqBody.append("email", email)
+            signUpReqBody.append("password", password)
+
+            if(image?.file) {
+                signUpReqBody.append("file", image.file)
+            }
+
+            await userService.signUp(signUpReqBody);
+            alert("Signed Up!");
+
+        }catch(error) {
+            alert("Sign Up Error. " + error?.response?.data?.error);
+        }
+
+        setIsSubmiting(false);
+    }
 
     return (
 
@@ -46,7 +83,7 @@ const SignUp = () => {
 
             <div className="publicPageContent">
 
-                <form>
+                <form onSubmit={onSubmit}>
 
                     <ImageUpload
                         setImage={setImage}
@@ -93,7 +130,7 @@ const SignUp = () => {
                     <Button
                         text="Sign Up"
                         type="submit"
-                        disabled={!signUpIsValid()}
+                        disabled={!signUpIsValid() || isSubmiting}
                     />
                 </form>
 
