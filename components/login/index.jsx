@@ -44,7 +44,7 @@ const Login = () => {
 
                     <PublicInput
                         image={key}
-                        placeholder="******"
+                        placeholder="Password..."
                         type="password"
                         inValueChange={e => setPassword(e.target.value)}
                         value={password}
@@ -59,7 +59,7 @@ const Login = () => {
                 </form>
 
                 <div className="publicPageFooter">
-                    <p>Do you have an account?</p>
+                    <p>Dont you have an account yet?</p>
                     <Link href="/signup">Sign Up to HireMi</Link>
                 </div>
 

@@ -1,0 +1,25 @@
+.signUpPage {
+    .uploadImageContainer {
+        text-align: center;
+        position: relative;
+        margin-bottom: 48px;
+
+        .avatarPreview {
+            height: 120px;
+            width:  120px;
+        }
+
+        &::after {
+            content: url(/images/camera.svg);
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            right: 0;
+            left: 90px;
+            margin: auto;
+            bottom: 0;
+
+        }
+
+    }
+}

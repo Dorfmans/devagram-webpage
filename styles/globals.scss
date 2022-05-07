@@ -3,6 +3,7 @@
 @import '../components/buttons/button.scss';
 @import '../components/publicInput/publicInput.scss';
 @import '../public/fonts/fonts.scss';
+@import '../pages/signup/signup.scss';
 
 * {
   background-color: $backgroundColor;
@@ -35,5 +36,21 @@ input{
   }
   &::-ms-input-placeholder {
     color: $grayColor;
+  }
+}
+
+.desktop  {
+  display: block;
+    
+  @media screen and (max-width: calc($desktopBreakpoint - 1px)) {
+    display: none;
+  }
+}
+
+.mobile  {
+  display: block;
+  
+  @media screen and (min-width: $desktopBreakpoint) {
+    display: none;
   }
 }
