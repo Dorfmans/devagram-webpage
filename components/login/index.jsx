@@ -15,7 +15,7 @@ import hireMi from "../../public/images/hireMi.svg";
 
 const userService = new UserService
 
-const Login = () => {
+const Login = ({afterLogin}) => {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -41,9 +41,12 @@ const Login = () => {
             await userService.login({
                 login: email,
                 password
-            })
+            });
 
-            alert("Logged In!")
+            if(afterLogin) {
+                afterLogin();
+            };
+            
         }catch(error){
             alert("Login Error. " + error?.response?.data?.error)
         }

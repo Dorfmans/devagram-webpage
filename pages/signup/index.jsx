@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import {useRouter} from "next/router"
 
 import ImageUpload from "../../components/imageUpload"
 import PublicInput from "../../components/publicInput"
@@ -27,6 +28,7 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isSubmiting, setIsSubmiting ] = useState(false);
+    const router = useRouter()
 
     const signUpIsValid = () => {
         return (
@@ -58,7 +60,11 @@ const SignUp = () => {
             }
 
             await userService.signUp(signUpReqBody);
-            alert("Signed Up!");
+            await userService.login({
+                login: email,
+                password
+            });
+            router.push('/')
 
         }catch(error) {
             alert("Sign Up Error. " + error?.response?.data?.error);
