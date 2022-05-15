@@ -36,6 +36,32 @@
         }
     }
 
+    .searchResultContainer {
+        position: absolute;
+        z-index: 99;
+        width: 100%;
+        
+        .searchResult {
+            border-bottom: 0.5px solid $grayColor;
+            border-top: 0.5px solid $grayColor;
+            display: flex;
+            padding: 12px 16px;
+
+            .avatar {
+                width: 32px;
+                height: 32px;
+                margin-right: 8px;
+            }
+
+            .resultUserInfo {
+                > * {
+                    display: block;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
     @media screen and (min-width: $desktopBreakpoint) {
         background-color: $backgroundColor;
         border: none;
@@ -70,6 +96,14 @@
                 }
             }
         }
-    }
-}
 
+        .searchResultContainer {
+            width: 25%;
+            margin: auto;
+            right: 0;
+            left: 120px;
+            cursor: pointer;
+            box-shadow: 0px 2px 5px $grayColor;
+        }
+    }
+};

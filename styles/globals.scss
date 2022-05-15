@@ -8,15 +8,19 @@
 @import '../pages/signup/signup.scss';
 
 * {
-  background-color: $backgroundColor;
   color: $contentColor;
   font-family: $fontRegular;
+  background-color: $backgroundColor;
   font-size:  14px;
 }
 
 html, body, #__next {
   height: 100%;
   margin: 0;
+}
+
+strong {
+  font-family: $fontBold;
 }
 
 .avatar {
@@ -77,6 +81,5 @@ input{
       cursor: pointer;
     
     }
-}
-
+  }
 }

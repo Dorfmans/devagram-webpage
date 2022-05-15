@@ -10,14 +10,20 @@ const Index = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-      setLoggedIn(userService.loggedIn())
+      setLoggedIn(userService.loggedIn());
   }, []);
 
   if(loggedIn) {
-    return (<Home />)
+    return (
+      <Home />
+    );
   }
-  return (<Login
-    afterLogin={() => setLoggedIn(true)}/>)
+    return (
+      <Login 
+        afterLogin={() => 
+          setLoggedIn(true)}
+      />
+    );
 };
 
 export default Index;
