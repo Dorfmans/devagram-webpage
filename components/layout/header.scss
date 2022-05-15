@@ -1,0 +1,75 @@
+.mainHeader {
+    border-bottom: 0.5px solid $grayColor;
+
+    .mainHeaderContent {
+        display: flex;
+        padding: 8px 16px;
+
+        .mainHeaderLogo {
+            position: relative;
+            width: 150px;
+            height: 40px;
+        }
+
+        .searchBar{
+            position: relative;
+            flex: 1;
+            margin-left: 16px;
+            display: flex;
+            align-items: center;
+
+            .searchBarIcon{
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                margin-left: 8px;
+            }
+
+            input {
+                border: 0.1px solid $primaryColor;
+                outline: none;
+                font-size: 12px;
+                padding: 8px 8px 8px 36px;
+                font-family: $fontLight;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+        background-color: $backgroundColor;
+        border: none;
+
+        .mainHeaderContent {
+            max-width: 60%;
+            margin: auto;
+            align-items: center;
+            justify-content: center;
+
+            .mainHeaderLogo {
+                width: 205px;
+                height: 70px;
+            }
+
+            .searchBar {
+                flex: 0.6;
+                margin: 0 5px 0 40px;
+
+                input {
+                    width: 100%;
+                }
+
+            }
+
+            .navbar {
+                ul{
+                    li{
+                        margin: 0 0 0 20px;
+
+                    }
+                }
+            }
+        }
+    }
+}
+

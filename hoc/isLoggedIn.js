@@ -1,5 +1,7 @@
 import UserService from "../services/UserService"
 import {useRouter} from "next/router"
+import Header from "../components/layout/Header.js"
+import Footer from "../components/layout/Footer";
 
 
 
@@ -14,7 +16,13 @@ const isLoggedIn = (Component) => {
                 router.replace('/')
                 return null;
             }            
-            return <Component {...props} />
+            return (
+            <>
+                <Header/>
+                <Component {...props} />
+                <Footer/>
+            </>
+            )
         }
         return null;
     }

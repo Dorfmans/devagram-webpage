@@ -2,6 +2,8 @@
 @import './publicPage.scss';
 @import '../components/buttons/button.scss';
 @import '../components/publicInput/publicInput.scss';
+@import '../components/layout/header.scss';
+@import '../components/layout/footer.scss';
 @import '../public/fonts/fonts.scss';
 @import '../pages/signup/signup.scss';
 
@@ -61,4 +63,20 @@ input{
   font-size: 70%;
   margin-top: -20px;
   margin-bottom: 20px;
+}
+
+.navbar {
+  ul{
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 10px 0;
+
+    li {
+      list-style: none;
+      cursor: pointer;
+    
+    }
+}
+
 }
