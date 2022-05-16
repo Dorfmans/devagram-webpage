@@ -5,42 +5,49 @@ import hireMiHeader from '../../public/images/hireMiHeader.svg'
 import search from '../../public/images/search.svg'
 import Navbar from './Navbar'
 import SearchResult from './SearchResult'
+import UserService from '../../services/UserService'
+import { useRouter } from 'next/router'
 
+const userService = new UserService();
 
 const Header = () => {
 
     const [searchResult, setSearchResult] = useState([]);
-    const [searchValue, setSearchValue] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+    const router = useRouter()
 
-    const onSearch = (e) => {
+    const onSearch = async (e) => {
         setSearchValue(e.target.value);
         setSearchResult([]);
 
-        if (searchValue.length < 3) {
+        if (e.target.value.length < 3) {
             return;
         }
+        try {
+            const {data} = await userService.search(searchValue);
+            setSearchResult(data);
 
-        setSearchResult([
-            {avatar: '',
-            name: 'Rapha',
-            email: 'rapha@dorf',
-            _id: '123456'
-            },
-            {avatar: '',
-            name: 'Rapha',
-            email: 'rapha@dorf',
-            _id: '123456'
-            }
-        ]);
+        }catch(error) {
+            alert('Couldnt search this user' + error?.response?.data?.error)
+        }
     }
 
-    const onClickSearchResult = (id) => {{id}};
+    const onClickSearchResult = (id) => {
+        setSearchResult([]);
+        setSearchValue('');
+        router.push(`/profile/${id}`)
+    };
     
+    const homeRefresh = () => {
+        router.push('/')
+    }
+
     return (
         <header className='mainHeader'>
             <div className='mainHeaderContent'>
                 <div className='mainHeaderLogo'>
                     <Image
+                        onClick={() => homeRefresh()}
                         src={hireMiHeader}
                         alt='Hire Mi Logo'
                         layout='fill'
@@ -72,7 +79,7 @@ const Header = () => {
                     {searchResult.map(r => (
                         <SearchResult 
                             avatar={r.avatar}
-                            name={r.name}
+                            name={r.user}
                             email={r.email}
                             key={r._id}
                             id={r._id}

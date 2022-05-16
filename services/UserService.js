@@ -25,4 +25,8 @@ export default class UserService extends HttpService {
     loggedIn() {
         return localStorage.getItem('token') !== null;
     }
+
+    async search(searchValue) {
+        return this.get('/search?search=' + searchValue)
+    }
 }
