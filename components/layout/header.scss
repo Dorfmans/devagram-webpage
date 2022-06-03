@@ -27,6 +27,7 @@
             }
 
             input {
+                background-color: $backgroundColor;
                 border: 0.1px solid $primaryColor;
                 outline: none;
                 font-size: 12px;
@@ -38,6 +39,7 @@
     }
 
     .searchResultContainer {
+        background-color: #050505;
         position: absolute;
         z-index: 99;
         width: 100%;

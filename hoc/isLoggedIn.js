@@ -15,12 +15,15 @@ const isLoggedIn = (Component) => {
             if(!userService.loggedIn()){
                 router.replace('/')
                 return null;
-            }            
+            }
+            
+            const loggedUser = userService.userLoggedInfo();
+
             return (
             <>
-                <Header/>
-                <Component {...props} />
-                <Footer/>
+                <Header loggedUser={loggedUser}/>
+                <Component loggedUser={loggedUser} {...props} />
+                <Footer loggedUser={loggedUser}/>
             </>
             )
         }

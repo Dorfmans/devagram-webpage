@@ -1,8 +1,9 @@
 import isLoggedIn from "../../hoc/isLoggedIn"
+import Feed from "../feed"
 
-const Home = () => {
+const Home = ({loggedUser}) => {
     return (
-        <h1>Home</h1>
+        <Feed loggedUser={loggedUser}/>
     );
 }
 
