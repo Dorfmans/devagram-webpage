@@ -1,8 +1,32 @@
+import { useRouter } from "next/router.js";
+import { useEffect, useState } from "react";
+import Feed from "../../../components/feed/index.js"
+import ProfileHeader from "../../../components/profileHeader/index.js";
 import isLoggedIn from "../../../hoc/isLoggedIn.js"
 
-const Profile = () => {
+
+
+
+const Profile = ( {loggedUser} ) => {
+
+    const [user, setUser] = useState({});
+    const router = useRouter();
+
+    useEffect(() => {
+        setUser({
+            user: 'Raphael Dorfman'
+        });
+    }, [router.query.id])
+
+
     return (
-        <h1>User Feed</h1>
+        <div className="profilePage">
+            <ProfileHeader 
+                loggedUser={loggedUser}
+                user={user}
+            />
+            <Feed loggedUser={loggedUser} />
+        </div>
     )
 }
 

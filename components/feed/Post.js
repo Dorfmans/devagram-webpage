@@ -87,7 +87,7 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
 
     return (
         <div className="post">
-            <Link href={`/profile/${user.id}`}>
+            <Link href={`/profile/${id}`}>
                 <section className="postHeader">
                     <Avatar src={user.avatar}/>
                     <strong>{user.user}</strong>

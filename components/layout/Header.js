@@ -16,6 +16,11 @@ const Header = () => {
     const [searchValue, setSearchValue] = useState('');
     const router = useRouter()
 
+    let headerClassName = "";
+    if (window && window.location.pathname !== '/') {
+        headerClassName = 'desktop'
+    }
+
     const onSearch = async (e) => {
         setSearchValue(e.target.value);
         setSearchResult([]);
@@ -43,7 +48,7 @@ const Header = () => {
     }
 
     return (
-        <header className='mainHeader'>
+        <header className={`mainHeader ${headerClassName}`}>
             <div className='mainHeaderContent'>
                 <div className='mainHeaderLogo'>
                     <Image

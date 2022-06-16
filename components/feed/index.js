@@ -16,6 +16,7 @@ const Feed = ({loggedUser}) => {
             const loadedPosts = data.map((post) => (
             {
                 id: post._id,
+                userId: post.idUser,
                 user: {
                     user: post.user.user,
                     avatar: post.user.avatar
@@ -29,7 +30,6 @@ const Feed = ({loggedUser}) => {
                 }))
             }
             ))
-            console.log(data)
             setPostsList(loadedPosts);
         }
     getFeed()}, [loggedUser]);
