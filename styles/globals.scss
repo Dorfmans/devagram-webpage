@@ -41,7 +41,7 @@ body {
 }
 
 input{
-  background-color: #101010;
+  background-color: transparent;
   &::placeholder {
     color: $grayColor;
     opacity: 1;
@@ -95,7 +95,7 @@ input{
 
 .desktopDeviceWidth {
   @media screen and (min-width: $desktopBreakpoint) {
-    width: 40%;
+    width: 30%;
     margin: auto;    
   }
 }

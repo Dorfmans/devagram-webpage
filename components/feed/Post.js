@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import CommentOnPost from "./CommentOnPost";
+import FeedService from "../../services/FeedService";
 
 import Avatar from "../avatar";
 import like from "../../public/images/like.svg"
@@ -13,8 +14,12 @@ import commentON from "../../public/images/commentON.svg"
 
 const breakLine = 100;
 
-const Post = ({user, postImage, description, comments, loggedUser}) => {
+const feedService = new FeedService();
 
+const Post = ({id, user, postImage, description, likes, comments, loggedUser}) => {
+
+    const [postLiked, setPostLiked] = useState(likes)
+    const [postComment, setPostComment] = useState(comments)
     const [showCommentSection, setShowCommentSection] = useState(false);
     const [lineLength, setLineLength] = useState(breakLine);
 
@@ -34,6 +39,52 @@ const Post = ({user, postImage, description, comments, loggedUser}) => {
         return message;
     }
 
+    const getCommentImage = () => {
+        return showCommentSection
+            ? commentON
+            : comment;
+    }
+
+    const inComment = async (comment) => {
+        try{
+            await feedService.addComment(id, comment);
+            setShowCommentSection(false);
+            setPostComment([...postComment,
+                        {
+                            user: loggedUser.user,
+                            message: comment
+                        }
+            ])
+        }catch(e) {
+            alert('Could not send your comment' + (e?.response?.data?.error || ""));
+        }
+    }
+
+    const userHasLiked = () => {
+        return postLiked.includes(loggedUser.id);
+    }
+
+    const likeCount = async () => {
+        try {   
+            await feedService.addLikes(id);
+            if (userHasLiked()) {
+                setPostLiked(
+                    postLiked.filter(userHasLiked => userHasLiked !== loggedUser.id)
+                )
+            } else {
+                setPostLiked([...postLiked, loggedUser.id])
+            }
+        }catch(e){
+            alert('Could not count your like' + (e?.response?.data?.error || ""));
+        }
+    }
+
+    const getLikeImage = () => {
+        return userHasLiked()
+            ? likeON
+            : like
+    }
+
     return (
         <div className="post">
             <Link href={`/profile/${user.id}`}>
@@ -50,7 +101,7 @@ const Post = ({user, postImage, description, comments, loggedUser}) => {
             <div className="postFooter">
                 <div className="postFooterActions">
                     <Image 
-                    src={comment}
+                    src={getCommentImage()}
                     alt='Comment icon'
                     width={20}
                     height={20}
@@ -58,15 +109,15 @@ const Post = ({user, postImage, description, comments, loggedUser}) => {
                     />
 
                     <Image 
-                    src={like}
+                    src={getLikeImage()}
                     alt='Like icon'
                     width={20}
                     height={20}
-                    onClick={()=>console.log('liked')}
+                    onClick={likeCount}
                     />
 
                     <span className="likesCounter">
-                        Liked by <strong>5 pessoas</strong>
+                        Liked by <strong>{postLiked.length}</strong> users.
                     </span>
                 </div>
 
@@ -86,7 +137,7 @@ const Post = ({user, postImage, description, comments, loggedUser}) => {
                 </div>
 
                 <div className="postComments">
-                    {comments.map((comment, i) => (
+                    {postComment.map((comment, i) => (
                     <div className="comment" key={i}>
                         <strong className="userName">{comment.user}</strong>
                         <p className="description">{comment.message}</p>
@@ -94,7 +145,7 @@ const Post = ({user, postImage, description, comments, loggedUser}) => {
                 </div>
             </div>
             {showCommentSection && 
-                <CommentOnPost loggedUser={loggedUser}/>
+                <CommentOnPost inComment={inComment} loggedUser={loggedUser}/>
             }
         </div>
     )

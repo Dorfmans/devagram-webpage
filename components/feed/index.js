@@ -1,27 +1,40 @@
 import { useEffect, useState } from 'react'
+import FeedService from '../../services/FeedService';
 import Post from './Post';
 
+const feedService = new FeedService();
+
 const Feed = ({loggedUser}) => {
-    const [postsList, setPostList] = useState([]);
+
+    const [postsList, setPostsList] = useState([]);
 
     useEffect(() => {
-        setPostList([
+            const getFeed = async() => {
+
+            const { data } = await feedService.loadPosts();
+            
+            const loadedPosts = data.map((post) => (
             {
-                id: '1',
+                id: post._id,
                 user: {
-                    id: '1',
-                    user: 'Raphael Dorfman',
-                    avatar: null},
-                postImage: 'https://resultadosdigitais.com.br/files/2015/08/por-do-sol-e1440783856626.jpg',
-                description: 'aisuehaiseuhaiesauhseiausehaiehaiesuhaieuahiseuhaiseuhaiseuasieahusieauhiaseuhaisehaiseusahieuahsieausheisauehaieuashieauheiauehiauehiesauhseiauhseiauhseiausheaiseuhaiehaieuaseoasiejaoseijaoeijh',
-                likes: [''],
-                comments: [{
-                    user: 'Fernando',
-                    message: 'uau'}]
-            },
-        ])
-    }, [loggedUser]);
-    
+                    user: post.user.user,
+                    avatar: post.user.avatar
+                },
+                postImage: post.image,
+                description: post.description,
+                likes: post.likes,
+                comments: post.comments.map(c => ({
+                    user: c.name,
+                    message: c.comment
+                }))
+            }
+            ))
+            console.log(data)
+            setPostsList(loadedPosts);
+        }
+    getFeed()}, [loggedUser]);
+
+
     return (
         <div className='feedContainer desktopDeviceWidth'>
             {postsList.map(postData => (
@@ -32,4 +45,4 @@ const Feed = ({loggedUser}) => {
     )
 }
 
-export default Feed
+export default Feed;

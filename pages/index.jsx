@@ -7,11 +7,15 @@ import UserService from "../services/UserService";
 const userService = new UserService();
 const Index = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(null);
 
   useEffect(() => {
       setLoggedIn(userService.loggedIn());
   }, []);
+
+  if(loggedIn === null) {
+    return null;
+  }
 
   if(loggedIn) {
     return (

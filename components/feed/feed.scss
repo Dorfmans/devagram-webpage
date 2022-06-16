@@ -96,7 +96,36 @@
         }
     }
     @media screen and (min-width: $desktopBreakpoint) {
-        padding-top: 8px;
+        padding-top: 14px;
+
+        .post {
+            .avatar {
+                width: 42px;
+                height: 42px;
+            }
+
+            .postFooter {
+                .postFooterActions {
+                    >span {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .commentOnPostContainer {
+                margin-top: 10px;
+
+                .commentOnPostBtn{
+                    background-color: transparent;
+                    color: $primaryColor;
+                    border: none;
+                    outline: none;
+                    font-size: 12px;
+                    font-family: $fontBold;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }
 
