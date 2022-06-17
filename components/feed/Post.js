@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import CommentOnPost from "./CommentOnPost";
-import FeedService from "../../services/FeedService";
+import FeedService from "../../services/FeedService.js";
 
 import Avatar from "../avatar";
 import like from "../../public/images/like.svg"
@@ -75,6 +75,7 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
                 setPostLiked([...postLiked, loggedUser.id])
             }
         }catch(e){
+            console.log(e)
             alert('Could not count your like' + (e?.response?.data?.error || ""));
         }
     }
@@ -87,7 +88,7 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
 
     return (
         <div className="post">
-            <Link href={`/profile/${id}`}>
+            <Link href={`/profile/${user.userId}`}>
                 <section className="postHeader">
                     <Avatar src={user.avatar}/>
                     <strong>{user.user}</strong>

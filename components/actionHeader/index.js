@@ -10,14 +10,14 @@ const ActionHeader = ({
 
 }) => {
     return (
-        <div className={`headerAction ${className}`}>
+        <div className={`actionHeader ${className}`}>
             {leftIcon ? (
                 <Image
                     src={leftIcon}
                     alt='Left Icon of Action Header'
                     onClick={onClickLeftAction}
-                    width={20}
-                    height={20}
+                    width={25}
+                    height={25}
                 />
             ) : (
                 leftText !== null && (

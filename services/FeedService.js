@@ -1,22 +1,22 @@
 import HttpService from "./HttpService"
 
 export default class FeedService extends HttpService {
-    async loadPosts(user) {
+    async loadPosts(idUser) {
         let url = '/feed';
-        if (user) {
-            url += `?id=${user}`;
+        if (idUser) {
+            url += `?id=${idUser}`;
         }
 
         return this.get(url);
     }
 
-    async addComment(postId, comment) {
-        return this.put(`/comment?id=${postId}`,{
+    async addComment(idPost, comment) {
+        return this.put(`/comment?id=${idPost}`,{
             comment
         });
     }
 
-    async addLikes(postId, like) {
-        return this.put(`/like?id=${postId}`)
+    async addLikes(idPost) {
+        return this.put(`/like?id=${idPost}`)
     }
 }

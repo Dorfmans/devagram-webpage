@@ -14,7 +14,7 @@ const Profile = ( {loggedUser} ) => {
 
     useEffect(() => {
         setUser({
-            user: 'Raphael Dorfman'
+            name: 'Raphael Dorfman'
         });
     }, [router.query.id])
 

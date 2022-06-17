@@ -5,8 +5,10 @@
 @import '../components/layout/header.scss';
 @import '../components/layout/footer.scss';
 @import '../components/feed/feed.scss';
+@import '../components/actionHeader/actionHeader.scss';
 @import '../public/fonts/fonts.scss';
 @import '../pages/signup/signup.scss';
+@import '../pages/profile/profile.scss';
 
 * {
   color: $contentColor;

@@ -12,13 +12,12 @@ const Feed = ({loggedUser}) => {
             const getFeed = async() => {
 
             const { data } = await feedService.loadPosts();
-            
             const loadedPosts = data.map((post) => (
             {
                 id: post._id,
-                userId: post.idUser,
                 user: {
-                    user: post.user.user,
+                    userId: post.idUser,
+                    user: post.user.name,
                     avatar: post.user.avatar
                 },
                 postImage: post.image,
@@ -30,6 +29,8 @@ const Feed = ({loggedUser}) => {
                 }))
             }
             ))
+            console.log(data)
+
             setPostsList(loadedPosts);
         }
     getFeed()}, [loggedUser]);
