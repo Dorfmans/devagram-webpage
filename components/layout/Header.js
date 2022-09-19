@@ -6,7 +6,7 @@ import search from '../../public/images/search.svg'
 import Navbar from './Navbar'
 import SearchResult from './SearchResult'
 import UserService from '../../services/UserService'
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 
 const userService = new UserService();
 
@@ -84,7 +84,7 @@ const Header = () => {
                     {searchResult.map(r => (
                         <SearchResult 
                             avatar={r.avatar}
-                            name={r.user}
+                            name={r.name}
                             email={r.email}
                             key={r._id}
                             id={r._id}

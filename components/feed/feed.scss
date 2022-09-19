@@ -1,7 +1,7 @@
 .feedContainer {
     padding-bottom: 60px;
     background-color: $backgroundColor;
-    margin-top: 16px !important;
+    margin-top: 16px;
 
     .post {
 
@@ -97,11 +97,18 @@
     }
     @media screen and (min-width: $desktopBreakpoint) {
         padding-top: 14px;
-
+        margin-top: 0px;
+        
         .post {
             .avatar {
                 width: 42px;
                 height: 42px;
+                
+            }
+
+            .postHeader {
+                cursor: pointer;
+                margin-top: 16px;
             }
 
             .postFooter {

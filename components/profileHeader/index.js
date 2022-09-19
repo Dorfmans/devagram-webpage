@@ -16,21 +16,23 @@ const ProfileHeader = ({
                 leftIcon={back}
             />
 
+            <hr className="headerBorder"/>
+
             <div className="profileStatus">
                 <Avatar src={user.avatar} />
 
                 <div className="profileInfo">
                     <div className="statusContainer">
                         <div className="status">
-                            <strong>15</strong>
+                            <strong>{user.posts}</strong>
                             <span>Posts</span>
                         </div>
                         <div className="status">
-                            <strong>1M</strong>
+                            <strong>{user.followers}</strong>
                             <span>Followers</span>
                         </div>
                         <div className="status">
-                            <strong>156</strong>
+                            <strong>{user.following}</strong>
                             <span>Following</span>
                         </div>
                     </div>

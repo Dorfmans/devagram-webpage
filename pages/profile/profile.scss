@@ -1,7 +1,8 @@
 .profilePage {
-    background-color: $backgroundColor;
 
     .profileHeader{
+        background-color: $backgroundColor;
+    
         .profileStatus{
             display: flex;
             align-items: center;
@@ -45,4 +46,36 @@
             }
         }
     }
+
+    @media screen and(min-width: $desktopBreakpoint) {
+        .profileHeader {
+            .actionHeader {
+                margin-top: 16px;
+                > span {
+                    display: none !important;
+                }
+            }
+
+            .headerBorder {
+                margin: 0 auto;
+                border: none;
+                background-color: $grayColor;
+                height: 1px;
+                width: 95%;
+
+            }
+
+            .profileStatus {
+                .avatar {
+                    width: 90px;
+                    height: 90px;    
+                }
+                .profileInfo{
+                    .btn{
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+    }   
 }

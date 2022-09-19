@@ -68,6 +68,7 @@
     @media screen and (min-width: $desktopBreakpoint) {
         background-color: $backgroundColor;
         border: none;
+        margin-bottom: 25px;
 
         .mainHeaderContent {
             max-width: 60%;

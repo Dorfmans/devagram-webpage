@@ -30,6 +30,10 @@ export default class UserService extends HttpService {
         return this.get('/search?search=' + searchValue)
     }
 
+    async getProfile (idUser) {
+        return this.get(`/search?id=${idUser}`)
+    }
+
     userLoggedInfo() {
         return{
             id: localStorage.getItem('id'),

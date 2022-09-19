@@ -1,8 +1,8 @@
 .actionHeader {
     display: flex;
-    border-bottom: 0.5px solid $grayColor;
     padding-left: 15px;
     padding-right: 15px;
+    background-color: $backgroundColor;
 
     h3 {
         font-family: $fontBold;
@@ -10,5 +10,4 @@
         flex: 1;
         text-align: center;
     }
-
 }

@@ -16,7 +16,7 @@ const breakLine = 100;
 
 const feedService = new FeedService();
 
-const Post = ({id, user, postImage, description, likes, comments, loggedUser}) => {
+const Post = ({ id, user, postImage, description, likes, comments, loggedUser }) => {
 
     const [postLiked, setPostLiked] = useState(likes)
     const [postComment, setPostComment] = useState(comments)
@@ -33,8 +33,8 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
 
     const getDescription = () => {
         let message = description.substring(0, lineLength);
-        if(exceedLine()){
-            return message+='...'
+        if (exceedLine()) {
+            return message += '...'
         }
         return message;
     }
@@ -46,16 +46,16 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
     }
 
     const inComment = async (comment) => {
-        try{
+        try {
             await feedService.addComment(id, comment);
             setShowCommentSection(false);
             setPostComment([...postComment,
-                        {
-                            user: loggedUser.user,
-                            message: comment
-                        }
+            {
+                user: loggedUser.user,
+                message: comment
+            }
             ])
-        }catch(e) {
+        } catch (e) {
             alert('Could not send your comment' + (e?.response?.data?.error || ""));
         }
     }
@@ -65,16 +65,16 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
     }
 
     const likeCount = async () => {
-        try {   
+        try {
             await feedService.addLikes(id);
             if (userHasLiked()) {
                 setPostLiked(
-                    postLiked.filter(userHasLiked => userHasLiked !== loggedUser.id)
+                    postLiked.filter(userHasLikedId => userHasLikedId !== loggedUser.id)
                 )
             } else {
                 setPostLiked([...postLiked, loggedUser.id])
             }
-        }catch(e){
+        } catch (e) {
             console.log(e)
             alert('Could not count your like' + (e?.response?.data?.error || ""));
         }
@@ -90,31 +90,31 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
         <div className="post">
             <Link href={`/profile/${user.userId}`}>
                 <section className="postHeader">
-                    <Avatar src={user.avatar}/>
+                    <Avatar src={user.avatar} />
                     <strong>{user.user}</strong>
                 </section>
             </Link>
 
             <div className="postImage">
-                <img src={postImage} alt={description}/>
+                <img src={postImage} alt='post image' />
             </div>
 
             <div className="postFooter">
                 <div className="postFooterActions">
-                    <Image 
-                    src={getCommentImage()}
-                    alt='Comment icon'
-                    width={20}
-                    height={20}
-                    onClick={() => setShowCommentSection(!showCommentSection)}
+                    <Image
+                        src={getCommentImage()}
+                        alt='Comment icon'
+                        width={20}
+                        height={20}
+                        onClick={() => setShowCommentSection(!showCommentSection)}
                     />
 
-                    <Image 
-                    src={getLikeImage()}
-                    alt='Like icon'
-                    width={20}
-                    height={20}
-                    onClick={likeCount}
+                    <Image
+                        src={getLikeImage()}
+                        alt='Like icon'
+                        width={20}
+                        height={20}
+                        onClick={likeCount}
                     />
 
                     <span className="likesCounter">
@@ -128,7 +128,7 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
                     <p className="description">
                         {getDescription()}
                         {exceedLine() && (
-                            <span 
+                            <span
                                 className="showDescription"
                                 onClick={showDescription}>
                                 more
@@ -139,14 +139,14 @@ const Post = ({id, user, postImage, description, likes, comments, loggedUser}) =
 
                 <div className="postComments">
                     {postComment.map((comment, i) => (
-                    <div className="comment" key={i}>
-                        <strong className="userName">{comment.user}</strong>
-                        <p className="description">{comment.message}</p>
-                    </div>))}
+                        <div className="comment" key={i}>
+                            <strong className="userName">{comment.user}</strong>
+                            <p className="description">{comment.message}</p>
+                        </div>))}
                 </div>
             </div>
-            {showCommentSection && 
-                <CommentOnPost inComment={inComment} loggedUser={loggedUser}/>
+            {showCommentSection &&
+                <CommentOnPost inComment={inComment} loggedUser={loggedUser} />
             }
         </div>
     )

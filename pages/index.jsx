@@ -18,16 +18,9 @@ const Index = () => {
   }
 
   if(loggedIn) {
-    return (
-      <Home />
-    );
+    return <Home />;
   }
-    return (
-      <Login 
-        afterLogin={() => 
-          setLoggedIn(true)}
-      />
-    );
+    return <Login afterLogin={() => setLoggedIn(true)}/>;
 };
 
 export default Index;

@@ -10,13 +10,13 @@ export default class FeedService extends HttpService {
         return this.get(url);
     }
 
-    async addComment(idPost, comment) {
-        return this.put(`/comment?id=${idPost}`,{
-            comment
+    async addComment(idPost, comments) {
+        return this.put(`/comments?id=${idPost}`,{
+            comments
         });
     }
 
     async addLikes(idPost) {
-        return this.put(`/like?id=${idPost}`)
+        return this.put(`/likes?id=${idPost}`)
     }
 }
