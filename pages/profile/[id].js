@@ -30,8 +30,7 @@ function Profile({ loggedUser }) {
         return router.query.id === 'mi';
     }
 
-    useEffect(() => async () => {
-
+    const getProfileData = async () => {
         if (!router.query.id) {
             return;
         }
@@ -39,8 +38,11 @@ function Profile({ loggedUser }) {
         const profileData = await getProfile(router.query.id);
 
         setUser(profileData);
-    }, [router.query.id])
+    }
 
+    useEffect(() => {
+        getProfileData()
+    }, [])
 
     return (
         <div className="profilePage">
@@ -49,10 +51,10 @@ function Profile({ loggedUser }) {
                 user={user}
                 itsMyProfile={itsMyProfile()}
             />
-            <Feed
+            {user?._id && <Feed
                 userProfile={user}
                 loggedUser={loggedUser}
-            />
+            />}
         </div>
     )
 }

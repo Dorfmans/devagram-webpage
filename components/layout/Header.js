@@ -6,7 +6,7 @@ import search from '../../public/images/search.svg'
 import Navbar from './Navbar'
 import SearchResult from './SearchResult'
 import UserService from '../../services/UserService'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 const userService = new UserService();
 
@@ -25,14 +25,14 @@ const Header = () => {
         setSearchValue(e.target.value);
         setSearchResult([]);
 
-        if (e.target.value.length < 3) {
+        if (searchValue.length < 3) {
             return;
         }
         try {
-            const {data} = await userService.search(searchValue);
+            const { data } = await userService.search(searchValue);
             setSearchResult(data);
 
-        }catch(error) {
+        } catch (error) {
             alert('Couldnt search this user' + error?.response?.data?.error)
         }
     }
@@ -42,7 +42,7 @@ const Header = () => {
         setSearchValue('');
         router.push(`/profile/${id}`)
     };
-    
+
     const homeRefresh = () => {
         router.push('/')
     }
@@ -76,19 +76,19 @@ const Header = () => {
                     />
                 </div>
 
-                <Navbar className='desktop'/>
+                <Navbar className='desktop' />
             </div>
 
-            {searchResult.length> 0 && (
+            {searchResult.length > 0 && (
                 <div className='searchResultContainer'>
                     {searchResult.map(r => (
-                        <SearchResult 
+                        <SearchResult
                             avatar={r.avatar}
                             name={r.name}
                             email={r.email}
                             key={r._id}
                             id={r._id}
-                            onClick={onClickSearchResult}/>
+                            onClick={onClickSearchResult} />
                     ))}
                 </div>
             )}

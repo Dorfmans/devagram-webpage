@@ -7,8 +7,7 @@ const feedService = new FeedService();
 const Feed = ({ loggedUser, userProfile }) => {
     const [postsList, setPostsList] = useState([]);
 
-    useEffect(() => async () => {
-        setPostsList([])
+    const getPosts = async () => {
         const { data } = await feedService.loadPosts(userProfile?._id);
         const loadedPosts = data.map((post) =>
         ({
@@ -29,8 +28,12 @@ const Feed = ({ loggedUser, userProfile }) => {
         )
 
         setPostsList(loadedPosts)
+    }
 
-    }, [loggedUser, userProfile]);
+    useEffect(() => {
+        setPostsList([])
+        getPosts();
+    }, []);
 
     if (!postsList.length) {
         return null;
